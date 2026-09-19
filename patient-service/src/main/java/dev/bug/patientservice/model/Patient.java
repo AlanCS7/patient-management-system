@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -18,21 +16,19 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
-    @Email
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @NotNull
+    @Column(nullable = false)
     private String address;
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDate dateOfBirth;
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDate registeredDate;
 
     public UUID getId() {
