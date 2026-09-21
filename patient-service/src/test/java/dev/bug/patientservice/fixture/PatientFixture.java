@@ -1,5 +1,6 @@
 package dev.bug.patientservice.fixture;
 
+import dev.bug.patientservice.dto.PatientRequestDTO;
 import dev.bug.patientservice.model.Patient;
 
 import java.time.LocalDate;
@@ -28,14 +29,29 @@ public final class PatientFixture {
                 LocalDate.of(1985, 5, 15));
     }
 
+    public static Patient createdPatient() {
+        return createPatient(
+                "123e4567-e89b-12d3-a456-426614174002",
+                "John Doe",
+                "john.doe@example.com",
+                "123 Main St",
+                LocalDate.of(1999, 10, 26));
+    }
+
     private static Patient createPatient(String id, String name, String email, String address, LocalDate dateOfBirth) {
-        var patient = new Patient();
+        var registeredDate = LocalDate.of(2026, 1, 1);
+        var patient = new Patient(name, email, address, dateOfBirth, registeredDate);
         patient.setId(UUID.fromString(id));
-        patient.setName(name);
-        patient.setEmail(email);
-        patient.setAddress(address);
-        patient.setDateOfBirth(dateOfBirth);
-        patient.setRegisteredDate(LocalDate.of(2026, 1, 1));
         return patient;
+    }
+
+    public static PatientRequestDTO createPatientRequestDTO() {
+        return new PatientRequestDTO(
+                "John Doe",
+                "john.doe@example.com",
+                "123 Main St",
+                "1999-10-26",
+                "2025-05-10"
+        );
     }
 }
