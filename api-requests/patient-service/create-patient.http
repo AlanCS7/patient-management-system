@@ -1,0 +1,13 @@
+### POST request to create a new patient
+POST http://localhost:4000/patients
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@email.com",
+  "address": "123 Main St, Virginia",
+  "dateOfBirth": "1990-05-21",
+  "registeredDate": "2024-11-29"
+}
+
+###

@@ -31,6 +31,17 @@ public class Patient {
     @Column(nullable = false)
     private LocalDate registeredDate;
 
+    public Patient() {
+    }
+
+    public Patient(String name, String email, String address, LocalDate dateOfBirth, LocalDate registeredDate) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.registeredDate = registeredDate;
+    }
+
     public UUID getId() {
         return id;
     }
