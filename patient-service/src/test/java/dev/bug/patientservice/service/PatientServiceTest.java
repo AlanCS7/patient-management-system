@@ -1,6 +1,5 @@
 package dev.bug.patientservice.service;
 
-import dev.bug.patientservice.dto.PatientResponseDTO;
 import dev.bug.patientservice.fixture.PatientFixture;
 import dev.bug.patientservice.model.Patient;
 import dev.bug.patientservice.repository.PatientRepository;
@@ -45,22 +44,8 @@ public class PatientServiceTest {
 
         assertAll(
                 () -> assertEquals(2, result.size()),
-                () -> assertEquals(
-                        new PatientResponseDTO(
-                                "123e4567-e89b-12d3-a456-426614174000",
-                                "John Doe",
-                                "john.doe@example.com",
-                                "123 Main St",
-                                "1990-01-01"),
-                        result.getFirst()),
-                () -> assertEquals(
-                        new PatientResponseDTO(
-                                "123e4567-e89b-12d3-a456-426614174001",
-                                "Jane Doe",
-                                "jane.doe@example.com",
-                                "456 Oak Ave",
-                                "1985-05-15"),
-                        result.get(1)));
+                () -> assertEquals(PatientFixture.johnDoeResponse(), result.getFirst()),
+                () -> assertEquals(PatientFixture.janeDoeResponse(), result.get(1)));
         verify(patientRepository).findAll();
     }
 
@@ -84,14 +69,7 @@ public class PatientServiceTest {
                 () -> assertEquals(patientRequestDTO.address(), persistedPatient.getAddress()),
                 () -> assertEquals(patientRequestDTO.dateOfBirth(), persistedPatient.getDateOfBirth().toString()),
                 () -> assertEquals(patientRequestDTO.registeredDate(), persistedPatient.getRegisteredDate().toString()),
-                () -> assertEquals(
-                        new PatientResponseDTO(
-                                "123e4567-e89b-12d3-a456-426614174002",
-                                "John Doe",
-                                "john.doe@example.com",
-                                "123 Main St",
-                                "1999-10-26"),
-                        result)
+                () -> assertEquals(PatientFixture.createdPatientResponse(), result)
         );
     }
 }
