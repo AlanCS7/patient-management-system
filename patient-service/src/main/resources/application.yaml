@@ -15,3 +15,7 @@ spring:
       mode: always
 server:
   port: 4000
+
+logging:
+  level:
+    root: info

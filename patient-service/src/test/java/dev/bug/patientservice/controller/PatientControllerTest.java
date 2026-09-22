@@ -102,6 +102,16 @@ class PatientControllerTest {
         mockMvc.perform(post("/patients")
                         .contentType(APPLICATION_JSON)
                         .content(requestBody))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.timestamp").exists())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.error").value("Bad Request"))
+                .andExpect(jsonPath("$.message").value("Validation failed for one or more fields"))
+                .andExpect(jsonPath("$.path").value("/patients"))
+                .andExpect(jsonPath("$.errors.length()").value(5))
+                .andExpect(jsonPath("$.errors[0].field").value("name"))
+                .andExpect(jsonPath("$.errors[0].message").value("Name is required"))
+                .andExpect(jsonPath("$.errors[1].field").value("email"))
+                .andExpect(jsonPath("$.errors[1].message").value("Email should be valid"));
     }
 }
