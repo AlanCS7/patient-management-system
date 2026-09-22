@@ -10,8 +10,10 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -20,8 +22,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.time.LocalDate;
 
 @WebMvcTest(controllers = PatientController.class)
 class PatientControllerTest {
@@ -109,9 +109,7 @@ class PatientControllerTest {
                 .andExpect(jsonPath("$.message").value("Validation failed for one or more fields"))
                 .andExpect(jsonPath("$.path").value("/patients"))
                 .andExpect(jsonPath("$.errors.length()").value(5))
-                .andExpect(jsonPath("$.errors[0].field").value("name"))
-                .andExpect(jsonPath("$.errors[0].message").value("Name is required"))
-                .andExpect(jsonPath("$.errors[1].field").value("email"))
-                .andExpect(jsonPath("$.errors[1].message").value("Email should be valid"));
+                .andExpect(jsonPath("$.errors[?(@.field == 'name')].message", hasItem("Name is required")))
+                .andExpect(jsonPath("$.errors[?(@.field == 'email')].message", hasItem("Email should be valid")));
     }
 }

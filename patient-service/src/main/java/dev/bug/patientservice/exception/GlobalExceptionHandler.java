@@ -13,6 +13,7 @@ import java.time.Instant;
 public class GlobalExceptionHandler {
 
     private static final HttpStatus BAD_REQUEST = HttpStatus.BAD_REQUEST;
+    private static final HttpStatus CONFLICT = HttpStatus.CONFLICT;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiErrorResponse> handleValidationException(
@@ -45,14 +46,14 @@ public class GlobalExceptionHandler {
 
         var response = new ApiErrorResponse(
                 Instant.now(),
-                BAD_REQUEST.value(),
-                BAD_REQUEST.getReasonPhrase(),
+                CONFLICT.value(),
+                CONFLICT.getReasonPhrase(),
                 ex.getMessage(),
                 request.getRequestURI(),
                 null);
 
         return ResponseEntity
-                .status(BAD_REQUEST)
+                .status(CONFLICT)
                 .body(response);
     }
 }
