@@ -67,8 +67,8 @@ public class PatientServiceTest {
                 () -> assertEquals(patientRequestDTO.name(), persistedPatient.getName()),
                 () -> assertEquals(patientRequestDTO.email(), persistedPatient.getEmail()),
                 () -> assertEquals(patientRequestDTO.address(), persistedPatient.getAddress()),
-                () -> assertEquals(patientRequestDTO.dateOfBirth(), persistedPatient.getDateOfBirth().toString()),
-                () -> assertEquals(patientRequestDTO.registeredDate(), persistedPatient.getRegisteredDate().toString()),
+                () -> assertEquals(patientRequestDTO.dateOfBirth(), persistedPatient.getDateOfBirth()),
+                () -> assertEquals(patientRequestDTO.registeredDate(), persistedPatient.getRegisteredDate()),
                 () -> assertEquals(PatientFixture.createdPatientResponse(), result)
         );
     }

@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.time.LocalDate;
+
 class PatientRequestDTOTest {
 
     @Test
@@ -20,8 +22,8 @@ class PatientRequestDTOTest {
                 () -> assertEquals("John Doe", patientRequestDTO.name()),
                 () -> assertEquals("john.doe@example.com", patientRequestDTO.email()),
                 () -> assertEquals("123 Main St", patientRequestDTO.address()),
-                () -> assertEquals("1999-10-26", patientRequestDTO.dateOfBirth()),
-                () -> assertEquals("2025-05-10", patientRequestDTO.registeredDate())
+                () -> assertEquals(LocalDate.of(1999, 10, 26), patientRequestDTO.dateOfBirth()),
+                () -> assertEquals(LocalDate.of(2025, 5, 10), patientRequestDTO.registeredDate())
         );
     }
 }

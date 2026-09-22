@@ -87,8 +87,8 @@ public final class PatientFixture {
                 "John Doe",
                 "john.doe@example.com",
                 "123 Main St",
-                "1999-10-26",
-                "2025-05-10"
+                LocalDate.of(1999, 10, 26),
+                LocalDate.of(2025, 5, 10)
         );
     }
 }

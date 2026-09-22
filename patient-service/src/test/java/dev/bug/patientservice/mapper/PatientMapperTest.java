@@ -39,8 +39,8 @@ public class PatientMapperTest {
                 () -> assertEquals(patientRequestDTO.name(), result.getName()),
                 () -> assertEquals(patientRequestDTO.email(), result.getEmail()),
                 () -> assertEquals(patientRequestDTO.address(), result.getAddress()),
-                () -> assertEquals(patientRequestDTO.dateOfBirth(), result.getDateOfBirth().toString()),
-                () -> assertEquals(patientRequestDTO.registeredDate(), result.getRegisteredDate().toString())
+                () -> assertEquals(patientRequestDTO.dateOfBirth(), result.getDateOfBirth()),
+                () -> assertEquals(patientRequestDTO.registeredDate(), result.getRegisteredDate())
         );
     }
 }

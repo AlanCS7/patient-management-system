@@ -4,8 +4,6 @@ import dev.bug.patientservice.dto.PatientRequestDTO;
 import dev.bug.patientservice.dto.PatientResponseDTO;
 import dev.bug.patientservice.model.Patient;
 
-import java.time.LocalDate;
-
 public class PatientMapper {
 
     public static PatientResponseDTO toDTO(Patient patient) {
@@ -23,8 +21,8 @@ public class PatientMapper {
                 patientRequestDTO.name(),
                 patientRequestDTO.email(),
                 patientRequestDTO.address(),
-                LocalDate.parse(patientRequestDTO.dateOfBirth()),
-                LocalDate.parse(patientRequestDTO.registeredDate())
+                patientRequestDTO.dateOfBirth(),
+                patientRequestDTO.registeredDate()
         );
     }
 }

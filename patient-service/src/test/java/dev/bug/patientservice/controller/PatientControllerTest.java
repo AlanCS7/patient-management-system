@@ -21,6 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
+
 @WebMvcTest(controllers = PatientController.class)
 class PatientControllerTest {
 
@@ -65,8 +67,8 @@ class PatientControllerTest {
                 "John Doe",
                 "john.doe@example.com",
                 "123 Main St",
-                "1999-10-26",
-                "2025-05-10");
+                LocalDate.of(1999, 10, 26),
+                LocalDate.of(2025, 5, 10));
         var createdPatient = PatientFixture.createdPatientResponse();
         when(patientService.createPatient(request)).thenReturn(createdPatient);
 
