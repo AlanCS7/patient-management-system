@@ -2,6 +2,7 @@ package dev.bug.patientservice.fixture;
 
 import dev.bug.patientservice.dto.PatientRequestDTO;
 import dev.bug.patientservice.dto.PatientResponseDTO;
+import dev.bug.patientservice.dto.PatientUpdateRequestDTO;
 import dev.bug.patientservice.model.Patient;
 
 import java.time.LocalDate;
@@ -89,6 +90,15 @@ public final class PatientFixture {
                 "123 Main St",
                 LocalDate.of(1999, 10, 26),
                 LocalDate.of(2025, 5, 10)
+        );
+    }
+
+    public static PatientUpdateRequestDTO createPatientUpdateRequestDTO() {
+        return new PatientUpdateRequestDTO(
+                "John Doe Jr",
+                "john.doe.jr@example.com",
+                "901 Oak Ave",
+                LocalDate.of(1999, 10, 26)
         );
     }
 }

@@ -5,21 +5,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
+@Table(name = "patient", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -34,12 +37,17 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String name, String email, String address, LocalDate dateOfBirth, LocalDate registeredDate) {
+    public Patient(UUID id, String name, String email, String address, LocalDate dateOfBirth, LocalDate registeredDate) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
         this.registeredDate = registeredDate;
+    }
+
+    public Patient(String name, String email, String address, LocalDate dateOfBirth, LocalDate registeredDate) {
+        this(null, name, email, address, dateOfBirth, registeredDate);
     }
 
     public UUID getId() {

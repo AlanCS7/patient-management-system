@@ -2,6 +2,7 @@ package dev.bug.patientservice.mapper;
 
 import dev.bug.patientservice.dto.PatientRequestDTO;
 import dev.bug.patientservice.dto.PatientResponseDTO;
+import dev.bug.patientservice.dto.PatientUpdateRequestDTO;
 import dev.bug.patientservice.model.Patient;
 
 public class PatientMapper {
@@ -24,5 +25,13 @@ public class PatientMapper {
                 patientRequestDTO.dateOfBirth(),
                 patientRequestDTO.registeredDate()
         );
+    }
+
+
+    public static void updateFromDTO(Patient patient, PatientUpdateRequestDTO patientUpdateRequestDTO) {
+        patient.setName(patientUpdateRequestDTO.name());
+        patient.setEmail(patientUpdateRequestDTO.email());
+        patient.setAddress(patientUpdateRequestDTO.address());
+        patient.setDateOfBirth(patientUpdateRequestDTO.dateOfBirth());
     }
 }

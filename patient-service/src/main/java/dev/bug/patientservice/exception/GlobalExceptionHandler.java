@@ -1,7 +1,6 @@
 package dev.bug.patientservice.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,11 +8,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.Instant;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
-    private static final HttpStatus BAD_REQUEST = HttpStatus.BAD_REQUEST;
-    private static final HttpStatus CONFLICT = HttpStatus.CONFLICT;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiErrorResponse> handleValidationException(
@@ -54,6 +54,24 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(CONFLICT)
+                .body(response);
+    }
+
+    @ExceptionHandler(PatientNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handlePatientNotFoundException(
+            PatientNotFoundException ex,
+            HttpServletRequest request
+    ) {
+        var response = new ApiErrorResponse(
+                Instant.now(),
+                NOT_FOUND.value(),
+                NOT_FOUND.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                null);
+
+        return ResponseEntity
+                .status(NOT_FOUND)
                 .body(response);
     }
 }
